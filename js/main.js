@@ -14,8 +14,8 @@ const generateCard = (student) => {
     const div = document.createElement('div')
 
     div.innerHTML = `
-        <card-student data-name="${student.nome}" data-bgcolor="${student.status}" data-team="${student.turma}" data-image="${student.foto}"></card-student>
-    `
+        <card-student data-name="${student.nome}" data-bgcolor="${student.status}" 
+        data-team="${student.turma}" data-image="${student.foto}"></card-student>`
 
     cardContainer.appendChild(div)
 }
