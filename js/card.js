@@ -25,7 +25,7 @@ class card extends HTMLElement {
             justify-content: space-evenly;
             align-items: center;
             margin-right: 10px;
-            background-color: #000;
+            background-color: ${this.bgcolor()};
         }
         
         .card-text{
@@ -33,7 +33,7 @@ class card extends HTMLElement {
             padding: 4px;
             text-align: center;
             text-transform: uppercase;
-            color: #fff;
+            color: #000;
             border-radius: 12px;
             box-shadow: 0 0 2px #000;
         }
@@ -42,7 +42,7 @@ class card extends HTMLElement {
             width: 50%;
             height: 50%;
             border-radius: 50%;
-            background-image: url(./img/sem_perfil.jpg);
+            background-image: url(${this.image()});
             background-size: cover;
             box-shadow: inset 0 0 8px #000;
         }
@@ -50,23 +50,46 @@ class card extends HTMLElement {
         return style
     }
 
-    createCard(){
-
-        // <div class="card">
-        //     <div class="card-text">Flor</div>
-        //     <div class="card-image"></div>
-        //     <div class="card-text">DS2T</div>
-        // </div>
+    createCard() {
 
         const card = document.createElement('div')
         card.classList.add('card')
+
         card.innerHTML = `
-            <div class="card-text">Flor</div>
+            <div class="card-text">${this.name()}</div>
             <div class="card-image"></div>
-            <div class="card-text">DS2M</div>
+            <div class="card-text">${this.team()}</div>
         `
         return card
     }
+
+    bgcolor() {
+        const status = this.getAttribute("data-bgcolor") ?? ""
+        let color = "#05b016"
+        if(status == "aprovado") {
+            color = "#05b016"
+        }else if(status == "reprovado") {
+            color = "#d10a06"
+        }else if(status == "desistente") {
+            color = "#b08805"
+        }
+        return color
+    }
+
+    name() {
+        const name = this.getAttribute("data-name") ?? "Aluno(a)"
+        return name
+    }
+
+    image() {
+        const image = this.getAttribute("data-image") ?? "../img/sem_perfil.jpg"
+        return image
+    }
+
+    team() {
+        const team = this.getAttribute("data-team") ?? "Turma"
+        return team
+    }
 }
 
-customElements.define('card-aluno', card)
+customElements.define('card-student', card)
